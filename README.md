@@ -744,14 +744,14 @@ sudo apt-get install iverilog gtkwave
 ```
 MAKE TWO FILES IN .v FORMAT AS SAID EARLIER FOR VERILOG NETLIST AND FOR THE TESTBENCH
 
-(my files were sv.v and stb.v)
+(my files were v.v and vtb.v)
 
 ```
 
 
 ###### (3) Compiling the iverilog:
 ```
-iverilog -o my_simulation.vvp sv.v sbt.v
+iverilog -o my_simulation.vvp v.v vbt.v
 ```
 ###### (4) To run the simulation:
 ```
@@ -770,13 +770,15 @@ gtkwave iiitb_rv32i.vcd
 ### SNAPSHOTS 
 
 #### (1)
-![1111111](https://github.com/user-attachments/assets/e7fc2e25-0fb3-44a9-82e7-231fd008cfdb)
+![Screenshot 2025-01-17 202444](https://github.com/user-attachments/assets/2828acb5-7b57-4d0f-8e35-bb85e2da8083)
+
 
 #### (2)
-![1112](https://github.com/user-attachments/assets/80962eaa-51ef-4f3e-826a-f6ab720c08e0)
+
+![Screenshot 2025-01-18 155126](https://github.com/user-attachments/assets/71bb2506-3b87-4874-9afb-6445fb5e8302)
 
 #### (3)
-![1113](https://github.com/user-attachments/assets/1e411742-f732-4575-9561-22b278891707)
+![Capture](https://github.com/user-attachments/assets/cda6c347-1f16-45b0-b7cb-300401d4e626)
 
 ***
 
@@ -784,7 +786,8 @@ gtkwave iiitb_rv32i.vcd
 
 
 
-![task 4 2](https://github.com/user-attachments/assets/dfd2229e-15c8-4d6c-8e5b-d8b2caff87b9)
+![4](https://github.com/user-attachments/assets/35fda0c4-312a-43a0-9c41-301cf3435a57)
+
 
 ***
 ***
