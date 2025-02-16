@@ -810,3 +810,50 @@ gtkwave iiitb_rv32i.vcd
 #### Memory Access (MEM)
 #### Write Back (WB)
 ***
+
+<summary>Task 5: PIR Sensor
+Code for PIR SENSOR
+
+```
+const int led = 9;     // Led positive terminal to the digital pin 9.
+const int sensor = 5;  // signal pin of sensor to digital pin 5.
+int val = 0;
+int count = 0;
+
+void setup() {             // Void setup is ran only once after each powerup or reset of the Arduino  board.
+  pinMode(led, OUTPUT);    // Led is determined as an output here.
+  pinMode(sensor, INPUT);  // PIR motion sensor is determined is an input here.
+  Serial.begin(9600);
+}
+
+void loop() {  // Void loop is ran over and  over and consists of the main program.
+  val = digitalRead(sensor);
+  delay(100);
+  if (val == HIGH) {
+    Serial.println("Motion detected.");
+    count = 10000;
+
+  } else {
+
+
+    count = count - 100;
+  }
+  int t = 0;
+  if (count > 0) {
+    t = count / 1000;
+  }
+  Serial.println(t);
+  if (count > 0) {
+    digitalWrite(led, LOW);
+  } else {
+    digitalWrite(led, HIGH);
+  }
+}
+```
+</summary>
+
+<summary> Task 6: Working of PIR SENSOR
+
+
+https://github.com/user-attachments/assets/184fd115-a7b1-42ca-826d-49a8111e6ca1
+
