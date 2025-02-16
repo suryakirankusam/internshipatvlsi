@@ -810,50 +810,113 @@ gtkwave iiitb_rv32i.vcd
 #### Memory Access (MEM)
 #### Write Back (WB)
 ***
+</details>
 
-<summary>Task 5: PIR Sensor
-Code for PIR SENSOR
+<details>
+ <summary> Task 5 : PIR Sensor </summary>
 
+## Overview
+A Passive Infrared (PIR) sensor circuit is an efficient and intelligent solution for motion-based automation in security systems, automatic lighting, and smart home applications. The PIR sensor detects movement by sensing infrared (IR) radiation changes in its field of view. This project focuses on designing a PIR-based motion detector circuit that can conserve electricity by activating lights or devices only when needed and turning them off when no motion is detected.
+
+## Components used in PIR Sensor 
+**PIR Sensor**
+
+Detects motion by sensing infrared (IR) radiation changes.
+Provides a HIGH (3.3V) or LOW (0V) output depending on motion detection.
+
+**Microcontroller (VSDSquadron)**
+
+Processes the PIR sensor’s signal and controls connected devices.
+Required for IoT integration or advanced automation.
+
+**Relay Module**
+
+Acts as a switch to control AC-powered appliances like lights or alarms.
+Choose 5V or 12V relay based on your power requirements.
+
+**Connecting Wires & Breadboard**
+
+For assembling the circuit and making connections.
+
+**Bulb**
+
+Glows when motion is detected for visual confirmation.
+
+## Pin Layout Diagram
+
+![image](https://github.com/user-attachments/assets/69697866-f5b8-4ac0-8b9a-0d7101f35615)
+
+## Pin Layout Table
+
+| Component        | Pin Name  | Connected To (Microcontroller Pin) |
+|-----------------|----------|------------------------------------|
+| **PIR Sensor**  | VCC (5V)  | 5V (or 3.3V depending on PIR model) |
+|                 | GND      | GND                                |
+|                 | OUT      | **GPIO2** (or any digital input pin) |
+| **Relay Module**| VCC (5V) | 5V (from Microcontroller)        |
+|                 | GND      | GND                                |
+|                 | IN       | **GPIO4** (or any digital output pin) |
+
+
+| Relay Module Pin | Connected To                       |
+|-----------------|----------------------------------|
+| **COM (Common)**  | **Live (L) AC Mains Input**     |
+| **NO (Normally Open)** | **Live (L) of Bulb**       |
+| **NC (Normally Closed)** | *Not Used* (Bulb stays ON if used) |
+
+| Bulb Pin | Connected To |
+|----------|-------------|
+| **Live (L)** | Relay **NO Terminal** |
+| **Neutral (N)** | AC **Neutral Line** |
+
+
+</details>
+
+<details>
+ <summary> Task 6 :  Working of PIR SENSOR </summary> 
+
+
+## Working Code of PIR Sensor
 ```
-const int led = 9;     // Led positive terminal to the digital pin 9.
-const int sensor = 5;  // signal pin of sensor to digital pin 5.
+#include <Arduino.h>
+
+#define LED_PIN PC1      // CH32V003: Use an appropriate GPIO pin (e.g., PC1)
+#define SENSOR_PIN PC2   // CH32V003: Use an appropriate GPIO pin (e.g., PC2)
+
 int val = 0;
 int count = 0;
 
-void setup() {             // Void setup is ran only once after each powerup or reset of the Arduino  board.
-  pinMode(led, OUTPUT);    // Led is determined as an output here.
-  pinMode(sensor, INPUT);  // PIR motion sensor is determined is an input here.
-  Serial.begin(9600);
+void setup() {
+    pinMode(LED_PIN, OUTPUT);
+    pinMode(SENSOR_PIN, INPUT);
+    Serial.begin(115200);  // Use correct baud rate for CH32V003
 }
 
-void loop() {  // Void loop is ran over and  over and consists of the main program.
-  val = digitalRead(sensor);
-  delay(100);
-  if (val == HIGH) {
-    Serial.println("Motion detected.");
-    count = 10000;
+void loop() {
+    val = digitalRead(SENSOR_PIN);
+    delay(100);
 
-  } else {
+    if (val == HIGH) {
+        Serial.println("Motion detected.");
+        count = 10000;
+    } else {
+        count -= 100;
+    }
 
+    int t = (count > 0) ? count / 1000 : 0;
+    Serial.println(t);
 
-    count = count - 100;
-  }
-  int t = 0;
-  if (count > 0) {
-    t = count / 1000;
-  }
-  Serial.println(t);
-  if (count > 0) {
-    digitalWrite(led, LOW);
-  } else {
-    digitalWrite(led, HIGH);
-  }
+    if (count > 0) {
+        digitalWrite(LED_PIN, LOW);
+    } else {
+        digitalWrite(LED_PIN, HIGH);
+    }
 }
+
 ```
-</summary>
-
-<summary> Task 6: Working of PIR SENSOR
-
+## Working Video of PIR Sensor
 
 https://github.com/user-attachments/assets/184fd115-a7b1-42ca-826d-49a8111e6ca1
+
+</details>
 
